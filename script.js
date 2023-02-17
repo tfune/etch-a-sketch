@@ -6,12 +6,11 @@ function createGrid () {
     let square = document.createElement('div');
     square.classList.add('square');
     container.appendChild(square);
-    };
-};
+    }
+}
 createGrid();
 
 let squares = document.querySelectorAll('.square');
-
 squares.forEach(square => {
     square.addEventListener('mouseover', function (e) {
         square.classList.add('hover');
@@ -21,12 +20,12 @@ squares.forEach(square => {
 const button = document.querySelector('.button');
 
 button.addEventListener('click', function (e) {
-    sideLength = prompt("How many squares per side? (max 100)", 16);
+    getSideLength (e);
     resetGrid(container);
     container.style.setProperty('--container-columns', sideLength);
     container.style.setProperty('--container-rows', sideLength);
     createGrid();
-    squares = document.querySelectorAll('.square')
+    squares = document.querySelectorAll('.square');
     squares.forEach(square => {
         square.addEventListener('mouseover', function (e) {
             square.classList.add('hover');
@@ -37,5 +36,15 @@ button.addEventListener('click', function (e) {
 function resetGrid (container) {
     while (container.firstChild) {
         container.removeChild(container.firstChild);
+    }
+}
+
+function getSideLength (e) {
+    sideLength = parseInt(prompt("How many squares per side? (max 100)", 16));
+    if (sideLength >= 1 && sideLength <= 100) {
+        return sideLength;
+    }
+    else {
+        getSideLength();
     }
 }
