@@ -11,12 +11,12 @@ function createGrid () {
 createGrid();
 
 let squares = document.querySelectorAll('.square');
-squares.forEach(square => {
-    square.addEventListener('mouseover', function (e) {
-        //square.classList.add('hover');
-        square.style.backgroundColor = getRandomColor();
-    })
-})
+squares.forEach(square => square.addEventListener('mouseover', getShade));
+    
+function color (e) {
+    //square.classList.add('hover');
+    //square.style.backgroundColor = getRandomColor();
+    }
 
 const button = document.querySelector('.button');
 
@@ -27,11 +27,7 @@ button.addEventListener('click', function (e) {
     container.style.setProperty('--container-rows', sideLength);
     createGrid();
     squares = document.querySelectorAll('.square');
-    squares.forEach(square => {
-        square.addEventListener('mouseover', function (e) {
-            square.classList.add('hover');
-        })
-    })
+    squares.forEach(square => square.addEventListener('mouseover', getShade));
 })
 
 function resetGrid (container) {
@@ -54,8 +50,18 @@ function getRandomColor () {
     let red = Math.floor(Math.random() * 256);
     let green = Math.floor(Math.random() * 256);
     let blue = Math.floor(Math.random() * 256);
-    let alpha = 1;
-    let randomColor = "rgba(" + red + ', ' + green + ', ' + blue + ', ' + alpha + ")";
+    let randomColor = "rgb(" + red + ', ' + green + ', ' + blue + ")";
     return randomColor;
 }
 
+function getShade () {
+    let currentShade = Number(this.style.backgroundColor.slice(14, 17));
+    if (this.style.backgroundColor === 'rgb(0, 0, 0)') {
+        return;
+    } else if (currentShade <= 0.9) {
+        currentShade = currentShade + 0.1
+        this.style.backgroundColor = `rgba(0, 0, 0, ${currentShade})`;
+    } else {
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+    }
+}
