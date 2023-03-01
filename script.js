@@ -13,7 +13,8 @@ createGrid();
 let squares = document.querySelectorAll('.square');
 squares.forEach(square => {
     square.addEventListener('mouseover', function (e) {
-        square.classList.add('hover');
+        //square.classList.add('hover');
+        square.style.backgroundColor = getRandomColor();
     })
 })
 
@@ -48,3 +49,13 @@ function getSideLength (e) {
         getSideLength();
     }
 }
+
+function getRandomColor () {
+    let red = Math.floor(Math.random() * 256);
+    let green = Math.floor(Math.random() * 256);
+    let blue = Math.floor(Math.random() * 256);
+    let alpha = 1;
+    let randomColor = "rgba(" + red + ', ' + green + ', ' + blue + ', ' + alpha + ")";
+    return randomColor;
+}
+
