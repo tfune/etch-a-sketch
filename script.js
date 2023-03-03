@@ -69,6 +69,10 @@ function getShade (e) {
     }
 }
 
+function erase (e) {
+    this.style.backgroundColor = 'white';
+}
+
 const blackButton = document.querySelector('#black');
 blackButton.addEventListener('click', function (e) {
     squares = document.querySelectorAll('.square');
@@ -91,4 +95,12 @@ pencilButton.addEventListener('click', function (e) {
     squares.forEach(square => square.removeEventListener('mouseover', black));
     squares.forEach(square => square.removeEventListener('mouseover', color));
     squares.forEach(square => square.addEventListener('mouseover', getShade));
+})
+
+const eraserButton = document.querySelector('#eraser');
+eraserButton.addEventListener('click', function (e) {
+    squares = document.querySelectorAll('.square');
+    squares.forEach(square => square.removeEventListener('mouseover', black));
+    squares.forEach(square => square.removeEventListener('mouseover', color));
+    squares.forEach(square => square.addEventListener('mouseover', erase));
 })
