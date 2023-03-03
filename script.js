@@ -11,23 +11,22 @@ function createGrid () {
 createGrid();
 
 let squares = document.querySelectorAll('.square');
-squares.forEach(square => square.addEventListener('mouseover', getShade));
-    
-function color (e) {
-    //square.classList.add('hover');
-    //square.style.backgroundColor = getRandomColor();
-    }
+squares.forEach(square => square.addEventListener('mouseover', black));
 
-const button = document.querySelector('.button');
+function black (e) {
+    this.style.backgroundColor = 'black';
+}
 
-button.addEventListener('click', function (e) {
+const sideLengthButton = document.querySelector('.sideLengthButton');
+
+sideLengthButton.addEventListener('click', function (e) {
     getSideLength (e);
     resetGrid(container);
     container.style.setProperty('--container-columns', sideLength);
     container.style.setProperty('--container-rows', sideLength);
     createGrid();
     squares = document.querySelectorAll('.square');
-    squares.forEach(square => square.addEventListener('mouseover', getShade));
+    squares.forEach(square => square.addEventListener('mouseover', black));
 })
 
 function resetGrid (container) {
@@ -46,6 +45,10 @@ function getSideLength (e) {
     }
 }
 
+function color (e) {
+    this.style.backgroundColor = getRandomColor();
+    }
+
 function getRandomColor () {
     let red = Math.floor(Math.random() * 256);
     let green = Math.floor(Math.random() * 256);
@@ -54,7 +57,7 @@ function getRandomColor () {
     return randomColor;
 }
 
-function getShade () {
+function getShade (e) {
     let currentShade = Number(this.style.backgroundColor.slice(14, 17));
     if (this.style.backgroundColor === 'rgb(0, 0, 0)') {
         return;
@@ -65,3 +68,27 @@ function getShade () {
         this.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
     }
 }
+
+const blackButton = document.querySelector('#black');
+blackButton.addEventListener('click', function (e) {
+    squares = document.querySelectorAll('.square');
+    squares.forEach(square => square.removeEventListener('mouseover', color));
+    squares.forEach(square => square.removeEventListener('mouseover', getShade));
+    squares.forEach(square => square.addEventListener('mouseover', black));
+})
+
+const rainbowButton = document.querySelector('#rainbow');
+rainbowButton.addEventListener('click', function (e) {
+    squares = document.querySelectorAll('.square');
+    squares.forEach(square => square.removeEventListener('mouseover', black));
+    squares.forEach(square => square.removeEventListener('mouseover', getShade));
+    squares.forEach(square => square.addEventListener('mouseover', color));
+})
+
+const pencilButton = document.querySelector('#pencil');
+pencilButton.addEventListener('click', function (e) {
+    squares = document.querySelectorAll('.square');
+    squares.forEach(square => square.removeEventListener('mouseover', black));
+    squares.forEach(square => square.removeEventListener('mouseover', color));
+    squares.forEach(square => square.addEventListener('mouseover', getShade));
+})
