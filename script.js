@@ -78,6 +78,7 @@ blackButton.addEventListener('click', function (e) {
     squares = document.querySelectorAll('.square');
     squares.forEach(square => square.removeEventListener('mouseover', color));
     squares.forEach(square => square.removeEventListener('mouseover', getShade));
+    squares.forEach(square => square.removeEventListener('mouseover', erase));
     squares.forEach(square => square.addEventListener('mouseover', black));
 })
 
@@ -86,6 +87,7 @@ rainbowButton.addEventListener('click', function (e) {
     squares = document.querySelectorAll('.square');
     squares.forEach(square => square.removeEventListener('mouseover', black));
     squares.forEach(square => square.removeEventListener('mouseover', getShade));
+    squares.forEach(square => square.removeEventListener('mouseover', erase));
     squares.forEach(square => square.addEventListener('mouseover', color));
 })
 
@@ -94,6 +96,7 @@ pencilButton.addEventListener('click', function (e) {
     squares = document.querySelectorAll('.square');
     squares.forEach(square => square.removeEventListener('mouseover', black));
     squares.forEach(square => square.removeEventListener('mouseover', color));
+    squares.forEach(square => square.removeEventListener('mouseover', erase));
     squares.forEach(square => square.addEventListener('mouseover', getShade));
 })
 
@@ -102,5 +105,6 @@ eraserButton.addEventListener('click', function (e) {
     squares = document.querySelectorAll('.square');
     squares.forEach(square => square.removeEventListener('mouseover', black));
     squares.forEach(square => square.removeEventListener('mouseover', color));
+    squares.forEach(square => square.removeEventListener('mouseover', getShade));
     squares.forEach(square => square.addEventListener('mouseover', erase));
 })
